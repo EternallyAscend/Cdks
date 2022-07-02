@@ -34,7 +34,7 @@ int isNullStackInt(struct StackInt* stack) {
 };
 
 int isEmptyStackInt(struct StackInt* stack) {
-    if (0 == stack->size) {
+    if (0 == stack->tail) {
         return ErrorEmptyStruct;
     }
     return False;
@@ -52,7 +52,7 @@ void extendStackInt(struct StackInt* stack) {
         newStack[cursor] = stack->stack[cursor];
     }
     free(stack->stack);
-    stack->stact = newStack;
+    stack->stack = newStack;
     stack->size = newSize;
 };
 
@@ -78,7 +78,6 @@ int popStackInt(struct StackInt* stack) {
 
 void printStackInt(struct StackInt* stack) {
     if (isNullStackInt(stack)) {
-        printf("Empty.\n");
         return;
     }
     printf("Stack Int: length %d, size %d.\n", stack->tail, stack->size);

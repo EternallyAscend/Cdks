@@ -7,24 +7,24 @@ struct StackInt {
     int* stack;
 };
 
-struct StackInt* generateWithSizeStackInt(unsigned int size) {};
+struct StackInt* generateWithSizeStackInt(unsigned int size);
 
-struct StackInt* generateStackInt() {};
+struct StackInt* generateStackInt();
 
-void destroyStackInt(struct StackInt* pointer) {};
+void destroyStackInt(struct StackInt* pointer);
 
-int isNullStackInt(struct StackInt* stack) {};
+int isNullStackInt(struct StackInt* stack);
 
-int isEmptyStackInt(struct StackInt* stack) {};
+int isEmptyStackInt(struct StackInt* stack);
 
-void extendStackInt(struct StackInt* stack) {};
+void extendStackInt(struct StackInt* stack);
 
-int pushStackInt(struct StackInt* stack, int value) {};
+int pushStackInt(struct StackInt* stack, int value);
 
-int popStackInt(struct StackInt* stack) {};
+int popStackInt(struct StackInt* stack);
 
-void printStackInt(struct StackInt* stack) {};
+void printStackInt(struct StackInt* stack);
 
-struct StackInt* copyStackInt(struct StackInt* stack) {};
+struct StackInt* copyStackInt(struct StackInt* stack);
 
 #endif
