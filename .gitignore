@@ -1,0 +1,6 @@
+# Environment
+.vscode
+
+# Output
+output
+*.exe
