@@ -3,6 +3,7 @@
 // Global header for C Development Toolkits.
 
 #include "dataStructure/linear/node.h"
+#include "dataStructure/linear/queue.h"
 #include "dataStructure/linear/stack.h"
 
 #endif

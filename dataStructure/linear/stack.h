@@ -15,7 +15,7 @@ struct StackInt* generateWithSizeStackInt(unsigned int size);
 
 struct StackInt* generateStackInt();
 
-void destroyStackInt(struct StackInt* pointer);
+void destroyStackInt(struct StackInt* stack);
 
 int isNullStackInt(struct StackInt* stack);
 

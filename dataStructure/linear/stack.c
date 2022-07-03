@@ -18,18 +18,21 @@ struct StackInt* generateStackInt() {
     return generateWithSizeStackInt(16);
 };
 
-void destroyStackInt(struct StackInt* pointer) {
-    if (NULL != pointer->stack) {
-        free(pointer->stack);
+void destroyStackInt(struct StackInt* stack) {
+    if (NULL == stack) {
+        return;
     }
-    free(pointer);
+    if (NULL != stack->stack) {
+        free(stack->stack);
+    }
+    free(stack);
 };
 
 int isNullStackInt(struct StackInt* stack) {
     if (NULL == stack) {
         return ErrorEmptyPointer;
     }
-    if (NULL == stack) {
+    if (NULL == stack->stack) {
         return ErrorEmptyPointer;
     }
     return False;
@@ -192,7 +195,7 @@ void printLinkedStackInt(struct LinkedStackInt* stack) {
         pointer = pointer->last;
         length++;
     }
-    printf("\n Linked Stack Int: length %d.\n", length);
+    printf("\nLinked Stack Int: length %d.\n", length);
 };
 
 struct LinkedStackInt* copyLinkedStackInt(struct LinkedStackInt* stack) {

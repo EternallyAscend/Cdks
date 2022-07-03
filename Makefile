@@ -1,11 +1,14 @@
 OUTPUT_FOLDER = output
 BINARY_NAME = cdks
 BINARY_PATH = ./$(OUTPUT_FOLDER)/$(BINARY_NAME)
+
+CC = gcc
+
 build:
 	make compile run
 compile:
 	$(shell if [ ! -d $(OUTPUT_FOLDER) ]; then mkdir $(OUTPUT_FOLDER); fi)
-	gcc -o $(BINARY_PATH) main.c dataStructure/linear/*
+	$(CC) -o $(BINARY_PATH) main.c dataStructure/linear/*
 run:
 ifeq ($(OS),Windows_NT)
 	-$(BINARY_PATH).exe

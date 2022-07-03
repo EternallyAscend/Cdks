@@ -8,7 +8,7 @@
 
 int main() {
     // testStackInt();
-    testLinkedStackInt();
+    // testLinkedStackInt();
     printf("Error Head is: %d.\n", ErrorHead);
     return 0;
 };

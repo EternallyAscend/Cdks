@@ -3,6 +3,8 @@
 
 // Linked List Nodes for Int.
 
+// Forward Linked List o -> o -> o -> NULL
+
 struct ForwardIntNode {
     struct ForwardIntNode* next;
     int value;
@@ -23,6 +25,8 @@ void destroyWholeForwardIntNode(struct ForwardIntNode* head);
 
 // TODO Add Reverse Linked List.
 
+// Backward Linked List NULL <- o < -o < -o
+
 struct BackwardIntNode {
     struct BackwardIntNode* last;
     int value;
@@ -42,6 +46,8 @@ struct BackwardIntNode* destroyLastBackwardIntNode(struct BackwardIntNode* tail)
 void destroyWholeBackwardIntNode(struct BackwardIntNode* tail);
 
 // TODO Add Reverse Linked List.
+
+// Linked List NULL -> o <-> o <-> o <- NULL
 
 struct IntNode {
     struct IntNode* last;
