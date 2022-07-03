@@ -1,9 +1,10 @@
+#include <stdio.h>
 #include <stdlib.h>
 
 #include "queue.h"
 #include "../../error.h"
 
-struct QueueInt* generateWithSizeQueueInt(int size) {
+struct QueueInt* generateWithSizeQueueInt(unsigned long long int size) {
     struct QueueInt* pointer = (struct QueueInt*)malloc(sizeof(struct QueueInt));
     pointer->head = 0;
     pointer->tail = 0;
@@ -51,14 +52,15 @@ void extendQueueInt(struct QueueInt* queue) {
     if (isNullQueueInt(queue)) {
         return;
     }
-    int newSize = queue->size;
+    unsigned long long int newSize = queue->size;
+    // TODO Check size limit.
     newSize = newSize << 1;
     int* newQueue = (int*)malloc(sizeof(int) * newSize);
-    int cursor = 0;
+    unsigned long long int cursor = 0;
     // for (; cursor < queue->size; cursor++) {
     //     newQueue[cursor] = queue->queue[(cursor + queue->head) % queue->size];
     // }
-    int flag = queue->head;
+    unsigned long long int flag = queue->head;
     if (queue->head < queue->tail) {
         for (; flag < queue->tail; cursor++, flag++) {
             newQueue[cursor] = queue->queue[flag];
@@ -124,7 +126,7 @@ int popQueueInt(struct QueueInt* queue) {
 
 void printQueueInt(struct QueueInt* queue) {
     int length = queue->tail - queue->head;
-    int cursor = queue->head;
+    unsigned long long int cursor = queue->head;
     if (queue->head < queue->tail) {
         for (; cursor < queue->tail; cursor++) {
             printf("%d ", queue->queue[cursor]);
@@ -148,8 +150,8 @@ struct QueueInt* copyQueueInt(struct QueueInt* queue) {
     copy->tail = 0;
     copy->size = queue->size;
     copy->queue = (int*)malloc(sizeof(int) * copy->size);
-    int cursor = 0;
-    int flag = queue->head;
+    unsigned long long int cursor = 0;
+    unsigned long long int flag = queue->head;
     if (queue->head < queue->tail) {
         for (; flag < queue->tail; cursor++, flag++) {
             copy->queue[cursor] = queue->queue[flag];

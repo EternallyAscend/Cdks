@@ -6,13 +6,13 @@
 // Array Version Queue for Int.
 
 struct QueueInt {
-    int head;
-    int tail;
-    int size;
+    unsigned long long int head;
+    unsigned long long int tail;
+    unsigned long long int size;
     int* queue;
 };
 
-struct QueueInt* generateWithSizeQueueInt(int size);
+struct QueueInt* generateWithSizeQueueInt(unsigned long long int size);
 
 struct QueueInt* generateQueueInt();
 
