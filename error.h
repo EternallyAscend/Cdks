@@ -11,7 +11,7 @@
 #endif
 
 enum Error {
-    ErrorHead = 8192,
+    ErrorHead = 2 << 16, // 2 << 27, // Modify error value if need.
     ErrorEmptyPointer,
     ErrorEmptyStruct,
 };
