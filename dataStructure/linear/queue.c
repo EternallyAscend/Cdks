@@ -125,7 +125,7 @@ int popQueueInt(struct QueueInt* queue) {
 };
 
 void printQueueInt(struct QueueInt* queue) {
-    int length = queue->tail - queue->head;
+    unsigned long long int length = queue->tail - queue->head;
     unsigned long long int cursor = queue->head;
     if (queue->head < queue->tail) {
         for (; cursor < queue->tail; cursor++) {
@@ -141,7 +141,7 @@ void printQueueInt(struct QueueInt* queue) {
             printf("%d ", queue->queue[cursor]);
         }
     }
-    printf("\nQueue Int: length %d, size %d.\n", length, queue->size);
+    printf("\nQueue Int: length %lld, size %lld.\n", length, queue->size);
 };
 
 struct QueueInt* copyQueueInt(struct QueueInt* queue) {
@@ -242,7 +242,7 @@ void printLinkedQueueInt(struct LinkedQueueInt* queue) {
         pointer = pointer->next;
         length++;
     }
-    printf("\nLinked Queue Int: length %d.\n", length);
+    printf("\nLinked Queue Int: length %lld.\n", length);
 };
 
 struct LinkedQueueInt* copyLinkedQueueInt(struct LinkedQueueInt* queue) {
