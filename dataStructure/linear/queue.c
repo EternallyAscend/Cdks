@@ -167,3 +167,93 @@ struct QueueInt* copyQueueInt(struct QueueInt* queue) {
     }
     return copy;
 };
+
+// Linked Version Queue for Int.
+
+struct LinkedQueueInt* generateLinkedQueueInt() {
+    struct LinkedQueueInt* pointer = (struct LinkedQueueInt*)malloc(sizeof(struct LinkedQueueInt));
+    pointer->head = NULL;
+    pointer->tail = NULL;
+    return pointer;
+};
+
+void destroyLinkedQueueInt(struct LinkedQueueInt* queue) {
+    if (isNullLinkedQueueInt(queue)) {
+        return;
+    }
+    if (!isEmptyLinkedQueueInt(queue)) {
+        destroyFirstForwardIntNode(queue->head);
+    }
+    free(queue);
+};
+
+int isNullLinkedQueueInt(struct LinkedQueueInt* queue) {
+    if (NULL == queue) {
+        return ErrorEmptyPointer;
+    }
+    return False;
+};
+
+int isEmptyLinkedQueueInt(struct LinkedQueueInt* queue) {
+    int error = isNullLinkedQueueInt(queue);
+    if (error) {
+        return error;
+    }
+    if (NULL == queue->head) {
+        return ErrorEmptyStruct;
+    }
+    return False;
+};
+
+int pushLinkedQueueInt(struct LinkedQueueInt* queue, int value) {
+    int error = isNullLinkedQueueInt(queue);
+    if (error) {
+        return error;
+    }
+    if (isEmptyLinkedQueueInt(queue)) {
+        queue->head = queue->tail = generateForwardIntNode(value);
+    } else {
+        queue->tail = combineNewForwardIntNode(queue->tail, value);
+    }
+    return True;
+};
+
+int popLinkedQueueInt(struct LinkedQueueInt* queue) {
+    int error = isEmptyLinkedQueueInt(queue);
+    if (error) {
+        return error;
+    }
+    int value = queue->head->value;
+    queue->head = destroyFirstForwardIntNode(queue->head);
+    if (NULL == queue->head) {
+        queue->tail = NULL;
+    }
+    return value;
+};
+
+void printLinkedQueueInt(struct LinkedQueueInt* queue) {
+    if (isNullLinkedQueueInt(queue)) {
+        return;
+    }
+    unsigned long long int length = 0;
+    struct ForwardIntNode* pointer = queue->head;
+    while (NULL != pointer) {
+        printf("%d ", pointer->value);
+        pointer = pointer->next;
+        length++;
+    }
+    printf("\nLinked Queue Int: length %d.\n", length);
+};
+
+struct LinkedQueueInt* copyLinkedQueueInt(struct LinkedQueueInt* queue) {
+    struct LinkedQueueInt* copy = generateLinkedQueueInt();
+    if (!isEmptyLinkedQueueInt(queue)) {
+        copy->head = copy->tail = generateForwardIntNode(queue->head->value);
+        struct ForwardIntNode* reader = queue->head->next;
+        while (NULL != reader) {
+            copy->tail = combineNewForwardIntNode(copy->tail, reader->value);
+            reader = reader->next;
+        }
+    }
+    return copy;
+};
