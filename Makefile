@@ -13,14 +13,15 @@ run:
 ifeq ($(OS),Windows_NT)
 	-$(BINARY_PATH).exe
 else
-	UNAME_S := $(shell uname -s)
-	ifeq ($(UNAME_S),Linux)
-		-$(BINARY_PATH)
-	endif
-	ifeq ($(UNAME_S),Darwin)
-		-$(BINARY_PATH)
-	endif
-	UNAME_P := $(shell uname -p)
+	-$(BINARY_PATH)
+	# UNAME_S := $(shell uname -s)
+	# ifeq ($(UNAME_S),Linux)
+	# 	-$(BINARY_PATH)
+	# endif
+	# ifeq ($(UNAME_S),Darwin)
+	# 	-$(BINARY_PATH)
+	# endif
+	# UNAME_P := $(shell uname -p)
 endif
 .PHONY: clean
 clean:
