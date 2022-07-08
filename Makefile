@@ -8,7 +8,7 @@ build:
 	make compile run
 compile:
 	$(shell if [ ! -d $(OUTPUT_FOLDER) ]; then mkdir $(OUTPUT_FOLDER); fi)
-	$(CC) -o $(BINARY_PATH) main.c dataStructure/linear/*
+	$(CC) -o $(BINARY_PATH) main.c dataStructure/linear/* dataStructure/nonlinear/*
 run:
 ifeq ($(OS),Windows_NT)
 	-$(BINARY_PATH).exe

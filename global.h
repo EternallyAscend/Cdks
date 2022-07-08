@@ -6,4 +6,6 @@
 #include "dataStructure/linear/queue.h"
 #include "dataStructure/linear/stack.h"
 
+#include "dataStructure/nonlinear/minHeap.h"
+
 #endif
