@@ -6,7 +6,7 @@
 // Array Version Stack for Int.
 
 struct StackInt {
-    int tail;
+    unsigned long long int tail;
     unsigned long long int size;
     int* stack;
 };

@@ -150,7 +150,7 @@ void printQueueInt(struct QueueInt* queue) {
             printf("%d ", queue->queue[cursor]);
         }
     }
-    printf("\nQueue Int: head %lld, tail %lld, length %lld, size %lld.\n", queue->head, queue->tail, queue->size);
+    printf("\nQueue Int: head %lld, tail %lld, length %lld, size %lld.\n", queue->head, queue->tail, length, queue->size);
 };
 
 struct QueueInt* copyQueueInt(struct QueueInt* queue) {

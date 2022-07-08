@@ -4,7 +4,7 @@ BINARY_PATH = ./$(OUTPUT_FOLDER)/$(BINARY_NAME)
 
 CC = gcc
 
-build:
+test:
 	make compile run
 compile:
 	$(shell if [ ! -d $(OUTPUT_FOLDER) ]; then mkdir $(OUTPUT_FOLDER); fi)
