@@ -6,7 +6,7 @@
 
 // Array Version Stack for Int.
 
-struct StackInt* generateWithSizeStackInt(unsigned int size) {
+struct StackInt* generateWithSizeStackInt(unsigned long long int size) {
     struct StackInt* pointer = (struct StackInt*)malloc(sizeof(struct StackInt));
     pointer->tail = 0;
     pointer->size = size;
@@ -49,12 +49,22 @@ int isEmptyStackInt(struct StackInt* stack) {
     return False;
 };
 
+unsigned long long int getLengthStackInt(struct StackInt* stack) {
+    if (isNullStackInt(stack)) {
+        return 0;
+    }
+    else {
+        return stack->tail;
+    }
+};
+
 void extendStackInt(struct StackInt* stack) {
     if (isNullStackInt(stack)) {
         return;
     }
-    int cursor = 0;
-    int newSize = stack->size;
+    unsigned long long int cursor = 0;
+    unsigned long long int newSize = stack->size;
+    // TODO Check limit for newSize.
     newSize = newSize << 1;
     int* newStack = (int*)malloc(sizeof(int) * newSize);
     for (; cursor < stack->tail; cursor++) {
@@ -89,10 +99,10 @@ void printStackInt(struct StackInt* stack) {
     if (isNullStackInt(stack)) {
         return;
     }
-    for (int cursor = 0; cursor < stack->size; cursor++) {
+    for (unsigned long long int cursor = 0; cursor < stack->size; cursor++) {
         printf("%d ", stack->stack[cursor]);
     }
-    printf("\nStack Int: length %d, size %d.\n", stack->tail, stack->size);
+    printf("\nStack Int: length %lld, size %lld.\n", stack->tail, stack->size);
 };
 
 struct StackInt* copyStackInt(struct StackInt* stack) {
@@ -157,6 +167,19 @@ int isEmptyLinkedStackInt(struct LinkedStackInt* stack) {
     return False;
 };
 
+unsigned long long int getLengthLinkedStackInt(struct LinkedStackInt* stack) {
+    if (isNullLinkedStackInt(stack)) {
+        return 0;
+    }
+    unsigned long long int length = 0;
+    struct BackwardIntNode* pointer = stack->tail;
+    while (NULL != pointer) {
+        pointer = pointer->last;
+        length++;
+    }
+    return length;
+};
+
 int pushLinkedStackInt(struct LinkedStackInt* stack, int value) {
     int error = isNullLinkedStackInt(stack);
     if (error) {
@@ -188,21 +211,21 @@ void printLinkedStackInt(struct LinkedStackInt* stack) {
     if (isNullLinkedStackInt(stack)) {
         return;
     }
-    int length = 0;
+    unsigned long long int length = 0;
     struct BackwardIntNode* pointer = stack->tail;
     while (NULL != pointer) {
         printf("%d ", pointer->value);
         pointer = pointer->last;
         length++;
     }
-    printf("\nLinked Stack Int: length %d.\n", length);
+    printf("\nLinked Stack Int: length %lld.\n", length);
 };
 
 struct LinkedStackInt* copyLinkedStackInt(struct LinkedStackInt* stack) {
     struct LinkedStackInt* copy = generateLinkedStackInt();
     if (!isEmptyLinkedStackInt(stack)) {
         copy->tail = generateBackwardIntNode(stack->tail->value);
-        struct BackwardIntNode* reader =   stack->tail->last;
+        struct BackwardIntNode* reader = stack->tail->last;
         struct BackwardIntNode* writer = copy->tail;
         while (NULL != reader) {
             writer->last = generateBackwardIntNode(reader->value);

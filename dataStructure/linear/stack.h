@@ -7,11 +7,11 @@
 
 struct StackInt {
     int tail;
-    int size;
+    unsigned long long int size;
     int* stack;
 };
 
-struct StackInt* generateWithSizeStackInt(unsigned int size);
+struct StackInt* generateWithSizeStackInt(unsigned long long int size);
 
 struct StackInt* generateStackInt();
 
@@ -20,6 +20,8 @@ void destroyStackInt(struct StackInt* stack);
 int isNullStackInt(struct StackInt* stack);
 
 int isEmptyStackInt(struct StackInt* stack);
+
+unsigned long long int getLengthStackInt(struct StackInt* stack);
 
 void extendStackInt(struct StackInt* stack);
 
@@ -47,6 +49,8 @@ void destroyLinkedStackInt(struct LinkedStackInt* stack);
 int isNullLinkedStackInt(struct LinkedStackInt* stack);
 
 int isEmptyLinkedStackInt(struct LinkedStackInt* stack);
+
+unsigned long long int getLengthLinkedStackInt(struct LinkedStackInt* stack);
 
 int pushLinkedStackInt(struct LinkedStackInt* stack, int value);
 
