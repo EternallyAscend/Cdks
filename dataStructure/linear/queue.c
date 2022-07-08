@@ -48,6 +48,15 @@ int isEmptyQueueInt(struct QueueInt* queue) {
     return False;
 };
 
+unsigned long long int getLengthQueueInt(struct QueueInt* queue) {
+    if (isNullQueueInt(queue)) {
+        return 0;
+    }
+    else {
+        return queue->tail;
+    }
+};
+
 void extendQueueInt(struct QueueInt* queue) {
     if (isNullQueueInt(queue)) {
         return;
@@ -141,7 +150,7 @@ void printQueueInt(struct QueueInt* queue) {
             printf("%d ", queue->queue[cursor]);
         }
     }
-    printf("\nQueue Int: length %lld, size %lld.\n", length, queue->size);
+    printf("\nQueue Int: head %lld, tail %lld, length %lld, size %lld.\n", queue->head, queue->tail, queue->size);
 };
 
 struct QueueInt* copyQueueInt(struct QueueInt* queue) {
@@ -150,22 +159,41 @@ struct QueueInt* copyQueueInt(struct QueueInt* queue) {
     copy->tail = 0;
     copy->size = queue->size;
     copy->queue = (int*)malloc(sizeof(int) * copy->size);
-    unsigned long long int cursor = 0;
     unsigned long long int flag = queue->head;
     if (queue->head < queue->tail) {
-        for (; flag < queue->tail; cursor++, flag++) {
-            copy->queue[cursor] = queue->queue[flag];
+        for (; flag < queue->tail; flag++) {
+            copy->queue[copy->tail++] = queue->queue[flag];
         }
     }
     else {
-        for (; flag < queue->size; cursor++, flag++) {
-            copy->queue[cursor] = queue->queue[flag];
+        for (; flag < queue->size; flag++) {
+            copy->queue[copy->tail++] = queue->queue[flag];
         }
-        for (flag = 0; flag < queue->tail; cursor++, flag++) {
-            copy->queue[cursor] = queue->queue[flag];
+        for (flag = 0; flag < queue->tail; flag++) {
+            copy->queue[copy->tail++] = queue->queue[flag];
         }
     }
     return copy;
+};
+
+void testQueueInt() {
+    struct QueueInt* queue = generateQueueInt();
+    for (int i = 0; i < 16; i++) {
+        pushQueueInt(queue, i);
+    }
+    printQueueInt(queue);
+    for (int i = 0; i < 8; i++) {
+        printf("Pop queue int %d.\n", popQueueInt(queue));
+    }
+    struct QueueInt* copy = copyQueueInt(queue);
+    printQueueInt(queue);
+    for (int i = 0; i < 16; i++) {
+        pushQueueInt(queue, i);
+    }
+    printQueueInt(queue);
+    printQueueInt(copy);
+    destroyQueueInt(queue);
+    destroyQueueInt(copy);
 };
 
 // Linked Version Queue for Int.
@@ -203,6 +231,19 @@ int isEmptyLinkedQueueInt(struct LinkedQueueInt* queue) {
         return ErrorEmptyStruct;
     }
     return False;
+};
+
+unsigned long long int getLengthLinkedQueueInt(struct LinkedQueueInt* queue) {
+    if (isNullLinkedQueueInt(queue)) {
+        return 0;
+    }
+    unsigned long long int length = 0;
+    struct ForwardIntNode* pointer = queue->head;
+    while (NULL != pointer) {
+        pointer = pointer->next;
+        length++;
+    }
+    return length;
 };
 
 int pushLinkedQueueInt(struct LinkedQueueInt* queue, int value) {
@@ -256,4 +297,24 @@ struct LinkedQueueInt* copyLinkedQueueInt(struct LinkedQueueInt* queue) {
         }
     }
     return copy;
+};
+
+void testLinkedQueueInt() {
+    struct LinkedQueueInt* queue = generateLinkedQueueInt();
+    for (int i = 0; i < 16; i++) {
+        pushLinkedQueueInt(queue, i);
+    }
+    printLinkedQueueInt(queue);
+    for (int i = 0; i < 8; i++) {
+        printf("Pop queue int %d.\n", popLinkedQueueInt(queue));
+    }
+    struct LinkedQueueInt* copy = copyLinkedQueueInt(queue);
+    printLinkedQueueInt(queue);
+    for (int i = 0; i < 16; i++) {
+        pushLinkedQueueInt(queue, i);
+    }
+    printLinkedQueueInt(queue);
+    printLinkedQueueInt(copy);
+    destroyLinkedQueueInt(copy);
+    destroyLinkedQueueInt(queue);
 };

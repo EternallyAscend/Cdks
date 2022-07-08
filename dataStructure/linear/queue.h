@@ -22,6 +22,8 @@ int isNullQueueInt(struct QueueInt* queue);
 
 int isEmptyQueueInt(struct QueueInt* queue);
 
+unsigned long long int getLengthQueueInt(struct QueueInt* queue);
+
 void extendQueueInt(struct QueueInt* queue);
 
 int pushQueueInt(struct QueueInt* queue, int value);
@@ -48,6 +50,8 @@ void destroyLinkedQueueInt(struct LinkedQueueInt* queue);
 int isNullLinkedQueueInt(struct LinkedQueueInt* queue);
 
 int isEmptyLinkedQueueInt(struct LinkedQueueInt* queue);
+
+unsigned long long int getLengthLinkedQueueInt(struct LinkedQueueInt* queue);
 
 int pushLinkedQueueInt(struct LinkedQueueInt* queue, int value);
 

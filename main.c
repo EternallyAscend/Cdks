@@ -9,6 +9,8 @@
 int main() {
     // testStackInt();
     // testLinkedStackInt();
+    testQueueInt();
+    testLinkedQueueInt();
     printf("Error Head is: %d.\n", ErrorHead);
     return 0;
 };
