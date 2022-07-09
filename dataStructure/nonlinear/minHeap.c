@@ -4,16 +4,21 @@
 #include "minHeap.h"
 #include "../../error.h"
 
-struct MinHeapInt* generateWithSizeMinHeapInt(unsigned long long int size) {
+int greaterThanInt(int left, int right) {
+    return left > right;
+};
+
+struct MinHeapInt* generateWithSizeMinHeapInt(int(*greaterThan)(int, int), unsigned long long int size) {
     struct MinHeapInt* pointer = (struct MinHeapInt*)malloc(sizeof(struct MinHeapInt));
     pointer->tail = 0;
     pointer->size = size;
     pointer->minHeap = (int*)malloc(sizeof(int) * size);
+    pointer->greaterThan = greaterThan;
     return pointer;
 };
 
-struct MinHeapInt* generateMinHeapInt() {
-    return generateWithSizeMinHeapInt(16);
+struct MinHeapInt* generateMinHeapInt(int(*greaterThan)(int, int)) {
+    return generateWithSizeMinHeapInt(greaterThan, 16);
 };
 
 void destroyMinHeapInt(struct MinHeapInt* minHeap) {
@@ -81,8 +86,8 @@ int pushMinHeapInt(struct MinHeapInt* minHeap, int value) {
     while(current) {
         // Find parent node and compare.
         unsigned long long int parent = (current - 1) >> 1;
-        // TODO Use greaterThan.
-        if (minHeap->minHeap[current] < minHeap->minHeap[parent]) {
+        if (minHeap->greaterThan(minHeap->minHeap[parent], minHeap->minHeap[current])) {
+        // if (minHeap->minHeap[current] < minHeap->minHeap[parent]) {
             int temporary = minHeap->minHeap[parent];
             minHeap->minHeap[parent] = minHeap->minHeap[current];
             minHeap->minHeap[current] = temporary;
@@ -110,9 +115,9 @@ int popMinHeapInt(struct MinHeapInt* minHeap) {
         unsigned long long int right = left + 1;
         if (left < minHeap->tail) {
             if (right < minHeap->tail && minHeap->minHeap[left] > minHeap->minHeap[right]) {
-                // TODO Use greaterThan.
                 // Compare right.
-                if (minHeap->minHeap[current] > minHeap->minHeap[right]) {
+                if (minHeap->greaterThan(minHeap->minHeap[current], minHeap->minHeap[right])) {
+                // if (minHeap->minHeap[current] > minHeap->minHeap[right]) {
                     int temporary = minHeap->minHeap[right];
                     minHeap->minHeap[right] = minHeap->minHeap[current];
                     minHeap->minHeap[current] = temporary;
@@ -123,9 +128,9 @@ int popMinHeapInt(struct MinHeapInt* minHeap) {
                 }
             }
             else {
-                // TODO Use greaterThan.
                 // Compare left.
-                if (minHeap->minHeap[current] > minHeap->minHeap[left]) {
+                if (minHeap->greaterThan(minHeap->minHeap[current], minHeap->minHeap[left])) {
+                // if (minHeap->minHeap[current] > minHeap->minHeap[left]) {
                     int temporary = minHeap->minHeap[left];
                     minHeap->minHeap[left] = minHeap->minHeap[current];
                     minHeap->minHeap[current] = temporary;
@@ -158,7 +163,7 @@ struct MinHeapInt* copyMinHeapInt(struct MinHeapInt* minHeap) {
     if (isNullMinHeapInt(minHeap)) {
         return NULL;
     }
-    struct MinHeapInt* copy = generateWithSizeMinHeapInt(minHeap->size);
+    struct MinHeapInt* copy = generateWithSizeMinHeapInt(minHeap->greaterThan, minHeap->size);
     for (; copy->tail < minHeap->tail; copy->tail++) {
         copy->minHeap[copy->tail] = minHeap->minHeap[copy->tail];
     }
@@ -166,7 +171,7 @@ struct MinHeapInt* copyMinHeapInt(struct MinHeapInt* minHeap) {
 };
 
 void testMinHeapInt() {
-    struct MinHeapInt* minHeap = generateMinHeapInt();
+    struct MinHeapInt* minHeap = generateMinHeapInt(greaterThanInt);
     for (int cursor = 0; cursor < 32; cursor++) {
         pushMinHeapInt(minHeap, 64 - cursor);
     }

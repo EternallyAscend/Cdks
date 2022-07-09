@@ -3,17 +3,18 @@
 
 // Array Version MinHeap for Int.
 
-// TODO Using greaterThan function instead of '<' operator.
-
-struct MinHeapInt {
+struct MinHeapInt { 
     unsigned long long int tail;
     unsigned long long int size;
     int* minHeap;
+    int(*greaterThan)(int, int);
 };
 
-struct MinHeapInt* generateWithSizeMinHeapInt(unsigned long long int size);
+int greaterThanInt(int left, int right);
 
-struct MinHeapInt* generateMinHeapInt();
+struct MinHeapInt* generateWithSizeMinHeapInt(int(*greaterThan)(int, int), unsigned long long int size);
+
+struct MinHeapInt* generateMinHeapInt(int(*greaterThan)(int, int));
 
 void destroyMinHeapInt(struct MinHeapInt* minHeap);
 
