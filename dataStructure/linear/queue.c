@@ -154,11 +154,10 @@ void printQueueInt(struct QueueInt* queue) {
 };
 
 struct QueueInt* copyQueueInt(struct QueueInt* queue) {
-    struct QueueInt* copy = (struct QueueInt*)malloc(sizeof(struct QueueInt));
-    copy->head = 0;
-    copy->tail = 0;
-    copy->size = queue->size;
-    copy->queue = (int*)malloc(sizeof(int) * copy->size);
+    if (isNullQueueInt(queue) || queue->size == 0) {
+        return NULL;
+    }
+    struct QueueInt* copy = generateWithSizeQueueInt(queue->size);
     unsigned long long int flag = queue->head;
     if (queue->head < queue->tail) {
         for (; flag < queue->tail; flag++) {
@@ -287,16 +286,17 @@ void printLinkedQueueInt(struct LinkedQueueInt* queue) {
 };
 
 struct LinkedQueueInt* copyLinkedQueueInt(struct LinkedQueueInt* queue) {
-    struct LinkedQueueInt* copy = generateLinkedQueueInt();
     if (!isEmptyLinkedQueueInt(queue)) {
+        struct LinkedQueueInt* copy = generateLinkedQueueInt();
         copy->head = copy->tail = generateForwardIntNode(queue->head->value);
         struct ForwardIntNode* reader = queue->head->next;
         while (NULL != reader) {
             copy->tail = combineNewForwardIntNode(copy->tail, reader->value);
             reader = reader->next;
         }
+        return copy;
     }
-    return copy;
+    return NULL;
 };
 
 void testLinkedQueueInt() {

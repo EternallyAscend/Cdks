@@ -106,6 +106,9 @@ void printStackInt(struct StackInt* stack) {
 };
 
 struct StackInt* copyStackInt(struct StackInt* stack) {
+    if (isNullStackInt(stack) || 0 == stack->size) {
+        return NULL;
+    }
     struct StackInt* copy = generateWithSizeStackInt(stack->size);
     for (; copy->tail < stack->tail; copy->tail++) {
         copy->stack[copy->tail] = stack->stack[copy->tail];
@@ -222,8 +225,8 @@ void printLinkedStackInt(struct LinkedStackInt* stack) {
 };
 
 struct LinkedStackInt* copyLinkedStackInt(struct LinkedStackInt* stack) {
-    struct LinkedStackInt* copy = generateLinkedStackInt();
     if (!isEmptyLinkedStackInt(stack)) {
+        struct LinkedStackInt* copy = generateLinkedStackInt();
         copy->tail = generateBackwardIntNode(stack->tail->value);
         struct BackwardIntNode* reader = stack->tail->last;
         struct BackwardIntNode* writer = copy->tail;
@@ -233,8 +236,9 @@ struct LinkedStackInt* copyLinkedStackInt(struct LinkedStackInt* stack) {
             writer = writer->last;
         }
         copy->head = writer;
+        return copy;
     }
-    return copy;
+    return NULL;
 };
 
 void testLinkedStackInt() {
