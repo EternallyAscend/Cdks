@@ -57,6 +57,25 @@ struct IntNode {
 
 struct IntNode* generateIntNode(int value);
 
+struct IntNode* combineFromFrontIntNode(struct IntNode* front, int value);
+
+struct IntNode* combineFromBackIntNode(struct IntNode* back, int value);
+
+struct IntNode* insertIntNode(struct IntNode* left, struct IntNode* right, int value);
+
+// Unsafe Method if 'node' isn't isolated or on the edge. It will divide this linked list into two pieces at 'node'.
+void destroySingleIntNode(struct IntNode* node);
+
+// Unsafe Method if 'head' isn't the Head of Linked List. It will divide linked list into two pieces at 'head'.
+struct IntNode* destroySingleFromFront(struct IntNode* head);
+
+// Unsafe Method if 'tail' isn't the Tail of Linked List. It will divide linked list into two pieces at 'tail'.
+struct IntNode* destroySingleFromBack(struct IntNode* tail);
+
+void destroyWholeIntNode(struct IntNode* node);
+
 // TODO Add Reverse Linked List.
+
+// TODO Add several basic method for linked list. Such as getLength, insert and so on.
 
 #endif

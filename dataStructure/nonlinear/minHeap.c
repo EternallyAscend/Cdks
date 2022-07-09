@@ -66,7 +66,7 @@ void extendMinHeapInt(struct MinHeapInt* minHeap) {
         return;
     }
     unsigned newSize = minHeap->size;
-    // TODO Check size limit.
+    // TODO Check limit for newSize.
     newSize = newSize << 1;
     minHeap->minHeap = (int*)realloc(minHeap->minHeap, sizeof(int) * newSize);
     minHeap->size = newSize;
@@ -159,7 +159,6 @@ void printMinHeapInt(struct MinHeapInt* minHeap) {
 };
 
 struct MinHeapInt* copyMinHeapInt(struct MinHeapInt* minHeap) {
-    // TODO Check Stack, Queue copy function for NULL pointer input.
     if (isNullMinHeapInt(minHeap)) {
         return NULL;
     }

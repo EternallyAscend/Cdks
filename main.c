@@ -11,7 +11,7 @@ int main() {
     // testLinkedStackInt();
     // testQueueInt();
     // testLinkedQueueInt();
-    testMinHeapInt();
+    // testMinHeapInt();
     printf("Error Head is: %d.\n", ErrorHead);
     return 0;
 };
