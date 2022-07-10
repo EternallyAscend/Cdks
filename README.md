@@ -6,7 +6,7 @@
 
 My GCC version is `8.1.0`, test functions in [`main.c`](./main.c). Including [`global.h`](./global.h) or specific header file for common using. [`Makefile`](./Makefile) content is as follows.
 
-- make build
+- make test
 - make compile
 - make run
 - make clean
@@ -30,7 +30,7 @@ My GCC version is `8.1.0`, test functions in [`main.c`](./main.c). Including [`g
 
 ### Nonlinear
 
-- MinHeap
-- MaxHeap
+- [MinHeap](./dataStructure/nonlinear/minHeap.h)
+- [MaxHeap](./dataStructure/nonlinear/maxHeap.h)
 - AVL Tree
 - R-B Tree

@@ -3,10 +3,7 @@
 
 #include "minHeap.h"
 #include "../../error.h"
-
-int greaterThanInt(int left, int right) {
-    return left > right;
-};
+#include "../algorithm/compare/basic.h"
 
 struct MinHeapInt* generateWithSizeMinHeapInt(int(*greaterThan)(int, int), unsigned long long int size) {
     struct MinHeapInt* pointer = (struct MinHeapInt*)malloc(sizeof(struct MinHeapInt));

@@ -10,8 +10,6 @@ struct MinHeapInt {
     int(*greaterThan)(int, int);
 };
 
-int greaterThanInt(int left, int right);
-
 struct MinHeapInt* generateWithSizeMinHeapInt(int(*greaterThan)(int, int), unsigned long long int size);
 
 struct MinHeapInt* generateMinHeapInt(int(*greaterThan)(int, int));
