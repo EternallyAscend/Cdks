@@ -62,7 +62,7 @@ void extendMinHeapInt(struct MinHeapInt* minHeap) {
     if (isNullMinHeapInt(minHeap)) {
         return;
     }
-    unsigned newSize = minHeap->size;
+    unsigned long long int newSize = minHeap->size;
     // TODO Check limit for newSize.
     newSize = newSize << 1;
     minHeap->minHeap = (int*)realloc(minHeap->minHeap, sizeof(int) * newSize);
