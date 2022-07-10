@@ -3,7 +3,7 @@
 
 #include "minHeap.h"
 #include "../../error.h"
-#include "../algorithm/compare/basic.h"
+#include "../../algorithm/compare/basic.h"
 
 struct MinHeapInt* generateWithSizeMinHeapInt(int(*greaterThan)(int, int), unsigned long long int size) {
     struct MinHeapInt* pointer = (struct MinHeapInt*)malloc(sizeof(struct MinHeapInt));
