@@ -9,5 +9,6 @@
 #include "dataStructure/linear/stack.h"
 
 #include "dataStructure/nonlinear/minHeap.h"
+#include "dataStructure/nonlinear/maxHeap.h"
 
 #endif
