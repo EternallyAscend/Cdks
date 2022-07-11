@@ -8,7 +8,7 @@ test:
 	make compile run
 compile:
 	$(shell if [ ! -d $(OUTPUT_FOLDER) ]; then mkdir $(OUTPUT_FOLDER); fi)
-	$(CC) -o $(BINARY_PATH) main.c algorithm/compare/* dataStructure/linear/* dataStructure/nonlinear/*
+	$(CC) -o $(BINARY_PATH) main.c algorithm/compare/* algorithm/sort/* dataStructure/linear/* dataStructure/nonlinear/*
 run:
 ifeq ($(OS),Windows_NT)
 	-$(BINARY_PATH).exe

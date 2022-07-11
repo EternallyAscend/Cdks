@@ -12,7 +12,8 @@ int main() {
     // testQueueInt();
     // testLinkedQueueInt();
     // testMinHeapInt();
-    testMaxHeapInt();
+    // testMaxHeapInt();
+    testQuickSortPointerInt();
     printf("Error Head is: %d.\n", ErrorHead);
     return 0;
 };
