@@ -5,6 +5,7 @@
 #include "algorithm/compare/basic.h"
 
 #include "algorithm/sort/quickSort.h"
+#include "algorithm/sort/mergeSort.h"
 
 #include "dataStructure/linear/node.h"
 #include "dataStructure/linear/queue.h"

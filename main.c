@@ -13,7 +13,8 @@ int main() {
     // testLinkedQueueInt();
     // testMinHeapInt();
     // testMaxHeapInt();
-    testQuickSortPointerInt();
+    // testQuickSortPointerInt();
+    testMergeSortPointerInt();
     printf("Error Head is: %d.\n", ErrorHead);
     return 0;
 };
