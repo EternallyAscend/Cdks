@@ -82,38 +82,42 @@ void testMergeSortPointerInt() {
     free(copy);
 };
 
-void mergeSortPointer(void* data, int(*greaterThan(void*, void*)), void(*assign)(void*, void*), unsigned long long int typeSize, unsigned long long int length) {
-    mergeSortPointerCore(data, greaterThan, assign, typeSize, 0, length);
+void mergeSortPointer(void** data, int(greaterThan(void*, void*)), void(*assign)(void**, void*), unsigned long long int length) {
+    mergeSortPointerCore(data, greaterThan, assign, 0, length);
 };
 
-void* mergeSortPointerCopy(void* data, int(*greaterThan(void*, void*)), void(*assign)(void*, void*), unsigned long long int length, unsigned long long int typeSize) {
-    void* copy = malloc(typeSize * length);
+void** mergeSortPointerCopy(void** data, int(greaterThan(void*, void*)), void(*assign)(void**, void*), unsigned long long int length) {
+    void** copy = (void**)malloc(sizeof(void*) * length);
+    // for (unsigned long long int i = 0; i < length; i++) {
+    //     printf("%lld %d\n", i, (int)data[i]);
+    // }
+    // system("pause");
     for (unsigned long long int i = 0; i < length; i++) {
-        assign(&(copy[i]), &(data[i]));
+        assign(&(copy[i]), data[i]);
     }
-    mergeSortPointerCore(copy, greaterThan, assign, typeSize, 0, length);
+    mergeSortPointerCore(copy, greaterThan, assign, 0, length);
     return copy;
 };
 
-void mergeSortPointerCore(void* data, int(*greaterThan(void*, void*)), void(*assign)(void*, void*), unsigned long long int typeSize, unsigned long long int left, unsigned long long int right) {
+void mergeSortPointerCore(void** data, int(greaterThan(void*, void*)), void(*assign)(void**, void*), unsigned long long int left, unsigned long long int right) {
     if ((left + 1) >= right) {
         return;
     }
     unsigned long long int middle = right - left;
     middle = middle >> 1;
     middle += left;
-    mergeSortPointerCore(data, greaterThan, assign, typeSize, left, middle);
-    mergeSortPointerCore(data, greaterThan, assign, typeSize, middle, right);
-    unsigned long long int cursor = 0;
+    mergeSortPointerCore(data, greaterThan, assign, left, middle);
+    mergeSortPointerCore(data, greaterThan, assign, middle, right);
     unsigned long long int lc = left;
     unsigned long long int rc = middle;
     unsigned long long int tempSize = right - left;
-    void* temp = malloc(typeSize * tempSize);
-    void* cache = malloc(typeSize);
+    unsigned long long int cursor = 0;
+    void** temp = (void**)malloc(sizeof(void*) * tempSize);
+    void* cache;
     while (lc < middle && rc < right) {
-        assign(cache, &(data[lc]));
-        if (greaterThan(&(data[lc]), &(data[rc]))) {
-        assign(cache, &(data[rc]));
+        assign(&cache, data[lc]);
+        if (greaterThan(data[lc], data[rc])) {
+            assign(&cache, data[rc++]);
         }
         else {
             lc++;
@@ -121,15 +125,14 @@ void mergeSortPointerCore(void* data, int(*greaterThan(void*, void*)), void(*ass
         assign(&(temp[cursor++]), cache);
     }
     while (lc < middle) {
-        assign(&(temp[cursor++]), &(data[lc++]));
+        assign(&(temp[cursor++]), data[lc++]);
     }
-    while (rc < middle) {
-        assign(&(temp[cursor++]), &(data[rc++]));
+    while (rc < right) {
+        assign(&(temp[cursor++]), data[rc++]);
     }
     for (cursor = 0; cursor < tempSize; cursor++) {
-        assign(&(data[left + cursor]), &(temp[cursor]));
+        assign(&(data[left + cursor]), temp[cursor]);
     }
-    free(cache);
     free(temp);
 };
 
@@ -137,32 +140,43 @@ int exampleGreaterThan(void* left, void* right) {
     return (int)left > (int)right;
 };
 
-void exampleAssign(void* left, void* right) {
-    left = (int)right;
+void exampleAssign(void** left, void* right) {
+    // printf("Before Assign %d %d\n", *(int*)left, (int)right);
+    *left = (int)right;
+    // printf("Assign %d %d\n", *(int*)left, (int)right);
 }
 
 void testMergeSortPointer() {
+    
+    // int origin = 1;
+    // void* copyInt;
+    // exampleAssign(&copyInt, origin);
+    // printf("%d %d\n", (int)copyInt, origin);
+    // copyInt = origin;
+    // printf("%d %d\n", (int)copyInt, origin);
+    // exit(0);
+
     int size = 128;
     unsigned long long int length = 128;
-    int* ascend = (int*)malloc(sizeof(int) * size);
-    int* descend = (int*)malloc(sizeof(int) * size);
+    void** ascend = (void**)malloc(sizeof(void*) * size);
+    void** descend = (void**)malloc(sizeof(void*) * size);
     for (unsigned long long int i = 0; i < size; i++) {
         ascend[i] = i;
         descend[i] = size - i;
     }
-    mergeSortPointer(ascend, exampleGreaterThan, exampleAssign, sizeof(int), length);
+    mergeSortPointer(ascend, exampleGreaterThan, exampleAssign, length);
     for (unsigned long long int i = 0; i < size; i++) {
         printf("%d ", ascend[i]);
     }
     printf("\n");
-    int* copy = (int*)mergeSortPointerCopy(descend, exampleGreaterThan, exampleAssign, sizeof(int), length);
-    
+    void** copy = (void**)mergeSortPointerCopy(descend, exampleGreaterThan, exampleAssign, length);
+    mergeSortPointer(descend, exampleGreaterThan, exampleAssign, length);
     for (unsigned long long int i = 0; i < size; i++) {
         printf("%d ", descend[i]);
     }
     printf("\n");
     for (unsigned long long int i = 0; i < size; i++) {
-        printf("%d ", copy[i]);
+        printf("%d ", (int)copy[i]);
     }
     printf("\n");
     free(ascend);

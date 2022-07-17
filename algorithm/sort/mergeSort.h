@@ -9,11 +9,11 @@ void mergeSortPointerCoreInt(int* data, unsigned long long int left, unsigned lo
 
 void testMergeSortPointerInt();
 
-void mergeSortPointer(void* data, int(*greaterThan(void*, void*)), void(*assign)(void*, void*), unsigned long long int typeSize, unsigned long long int length);
+void mergeSortPointer(void** data, int(greaterThan(void*, void*)), void(*assign)(void**, void*), unsigned long long int length);
 
-void* mergeSortPointerCopy(void* data, int(*greaterThan(void*, void*)), void(*assign)(void*, void*), unsigned long long int length, unsigned long long int typeSize);
+void** mergeSortPointerCopy(void** data, int(greaterThan(void*, void*)), void(*assign)(void**, void*), unsigned long long int length);
 
-void mergeSortPointerCore(void* data, int(*greaterThan(void*, void*)), void(*assign)(void*, void*), unsigned long long int typeSize, unsigned long long int left, unsigned long long int right);
+void mergeSortPointerCore(void** data, int(greaterThan(void*, void*)), void(*assign)(void**, void*), unsigned long long int left, unsigned long long int right);
 
 void testMergeSortPointer();
 

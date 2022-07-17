@@ -14,7 +14,8 @@ int main() {
     // testMinHeapInt();
     // testMaxHeapInt();
     // testQuickSortPointerInt();
-    testMergeSortPointerInt();
+    // testMergeSortPointerInt();
+    testMergeSortPointer();
     printf("Error Head is: %d.\n", ErrorHead);
     return 0;
 };
